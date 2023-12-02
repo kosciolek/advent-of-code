@@ -12,7 +12,7 @@ const NUMBERS = {
 };
 
 console.log(
-  Deno.readTextFileSync("1.txt")
+  Deno.readTextFileSync("2023-1.txt")
     .split("\n")
     .reduce((sum, line) => {
       let first: string | null = null;

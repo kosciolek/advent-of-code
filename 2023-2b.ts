@@ -1,5 +1,5 @@
 console.log(
-  Deno.readTextFileSync("2.txt")
+  Deno.readTextFileSync("2023-2.txt")
     .split("\n")
     .map((line, i) => ({
       id: i + 1,
