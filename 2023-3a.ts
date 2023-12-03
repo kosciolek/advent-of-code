@@ -1,6 +1,4 @@
-const input = Deno.readTextFileSync("2023-3.txt")
-  .split("\n")
-  .map((line) => line.split(""));
+const input = Deno.readTextFileSync("2023-3.txt").split("\n");
 
 const isDigit = (char: string) => 48 <= char.charCodeAt(0) && char.charCodeAt(0) <= 57;
 

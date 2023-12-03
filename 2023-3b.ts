@@ -1,6 +1,4 @@
-const input = Deno.readTextFileSync("2023-3.txt")
-  .split("\n")
-  .map((line) => line.split(""));
+const input = Deno.readTextFileSync("2023-3.txt").split("\n");
 
 const isDigit = (char: string) => 48 <= char.charCodeAt(0) && char.charCodeAt(0) <= 57;
 
@@ -43,8 +41,6 @@ const isPart = (row: number, column: number, length: number): boolean => {
   return false;
 };
 
-let sum = 0;
-
 const scanNumber = (rowIndex: number, partColumnIndex: number) => {
   let start = partColumnIndex;
   let end = partColumnIndex;
@@ -60,7 +56,7 @@ const scanNumber = (rowIndex: number, partColumnIndex: number) => {
   };
 };
 
-const handleGear = (rowIndex: number, columnIndex: number) => {
+const handleGear = (rowIndex: number, columnIndex: number): number => {
   const numbers: Array<{ row: number; column: number; length: number; isPart: boolean }> = [];
   for (let r = rowIndex - 1; r <= rowIndex + 1; r += 1) {
     for (let c = columnIndex - 1; c <= columnIndex + 1; c += 1) {
@@ -89,25 +85,24 @@ const handleGear = (rowIndex: number, columnIndex: number) => {
   const partNumbers = numbers.filter((n) => n.isPart);
   if (partNumbers.length === 2) {
     const [firstPartNumber, secondPartNumber] = partNumbers;
-    sum +=
+    return (
       Number(
-        input[firstPartNumber.row]
-          .slice(firstPartNumber.column, firstPartNumber.column + firstPartNumber.length)
-          .join("")
+        input[firstPartNumber.row].slice(firstPartNumber.column, firstPartNumber.column + firstPartNumber.length)
       ) *
       Number(
-        input[secondPartNumber.row]
-          .slice(secondPartNumber.column, secondPartNumber.column + secondPartNumber.length)
-          .join("")
-      );
+        input[secondPartNumber.row].slice(secondPartNumber.column, secondPartNumber.column + secondPartNumber.length)
+      )
+    );
   }
+  return 0;
 };
 
+let sum = 0;
 for (let rowIndex = 0; rowIndex < input.length; rowIndex++) {
   for (let columnIndex = 0; columnIndex < input[rowIndex].length; columnIndex++) {
     const char = input[rowIndex][columnIndex];
     if (char === "*") {
-      handleGear(rowIndex, columnIndex);
+      sum += handleGear(rowIndex, columnIndex);
     }
   }
 }
