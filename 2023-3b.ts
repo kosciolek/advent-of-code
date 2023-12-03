@@ -56,7 +56,7 @@ const scanNumber = (rowIndex: number, partColumnIndex: number) => {
   };
 };
 
-const handleGear = (rowIndex: number, columnIndex: number): number => {
+const getGearScore = (rowIndex: number, columnIndex: number): number => {
   const numbers: Array<{ row: number; column: number; length: number; isPart: boolean }> = [];
   for (let r = rowIndex - 1; r <= rowIndex + 1; r += 1) {
     for (let c = columnIndex - 1; c <= columnIndex + 1; c += 1) {
@@ -102,7 +102,7 @@ for (let rowIndex = 0; rowIndex < input.length; rowIndex++) {
   for (let columnIndex = 0; columnIndex < input[rowIndex].length; columnIndex++) {
     const char = input[rowIndex][columnIndex];
     if (char === "*") {
-      sum += handleGear(rowIndex, columnIndex);
+      sum += getGearScore(rowIndex, columnIndex);
     }
   }
 }
