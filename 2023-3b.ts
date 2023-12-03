@@ -83,18 +83,17 @@ const getGearScore = (rowIndex: number, columnIndex: number): number => {
   }
 
   const partNumbers = numbers.filter((n) => n.isPart);
-  if (partNumbers.length === 2) {
-    const [firstPartNumber, secondPartNumber] = partNumbers;
-    return (
-      Number(
-        input[firstPartNumber.row].slice(firstPartNumber.column, firstPartNumber.column + firstPartNumber.length)
-      ) *
-      Number(
-        input[secondPartNumber.row].slice(secondPartNumber.column, secondPartNumber.column + secondPartNumber.length)
-      )
-    );
+  if (partNumbers.length !== 2) {
+    return 0;
   }
-  return 0;
+
+  const [firstPartNumber, secondPartNumber] = partNumbers;
+  return (
+    Number(input[firstPartNumber.row].slice(firstPartNumber.column, firstPartNumber.column + firstPartNumber.length)) *
+    Number(
+      input[secondPartNumber.row].slice(secondPartNumber.column, secondPartNumber.column + secondPartNumber.length)
+    )
+  );
 };
 
 let sum = 0;
