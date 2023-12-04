@@ -11,7 +11,14 @@ const cards = Deno.readTextFileSync("2023-4.txt")
     };
   });
 
+const cache = new Map<number, number>();
+
 const getCardCount = (index: number) => {
+  const cached = cache.get(index);
+  if (cached !== undefined) {
+    return cached;
+  }
+
   let count = 0;
   let duplicates = 0;
 
@@ -22,6 +29,7 @@ const getCardCount = (index: number) => {
     }
   }
 
+  cache.set(index, count + 1);
   return count + 1;
 };
 
